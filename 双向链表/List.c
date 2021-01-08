@@ -1,5 +1,5 @@
 #include"List.h"
-//¶¯Ì¬ÉêÇëÒ»¸ö½Úµã
+//åŠ¨æ€ç”³è¯·ä¸€ä¸ªèŠ‚ç‚¹
 ListNode* BuyListNode(LTDataType x)
 {
 	ListNode* node = (ListNode*)malloc(sizeof(ListNode));
@@ -8,11 +8,11 @@ ListNode* BuyListNode(LTDataType x)
 	node->data = x;
 	return node;
 }
-//³õÊ¼»¯
+//åˆå§‹åŒ–
 //ListInit(ListNode** pphead)
 //{
 //	*pphead = BuyListNode(0);
-//	(*pphead)->next = *pphead;//¼ÓÀ¨ºÅÊÇÒòÎª * Óë -> ÓÅÏÈ¼¶µÄÎÊÌâ ÐèÒª ÏÈÖ´ÐÐ *
+//	(*pphead)->next = *pphead;//åŠ æ‹¬å·æ˜¯å› ä¸º * ä¸Ž -> ä¼˜å…ˆçº§çš„é—®é¢˜ éœ€è¦ å…ˆæ‰§è¡Œ *
 //	(*pphead)->prev = *pphead;
 //} 
   ListNode* ListInit()
@@ -22,7 +22,7 @@ ListNode* BuyListNode(LTDataType x)
 	phead->prev = phead;
 	return phead;
   }
-  //Ïú»ÙÁ´±í Í·½áµãÖÃ¿Õ
+  //é”€æ¯é“¾è¡¨ å¤´ç»“ç‚¹ç½®ç©º
   void ListDestroy(ListNode** pphead)
   {
 	  assert(*pphead);
@@ -31,21 +31,21 @@ ListNode* BuyListNode(LTDataType x)
 	  **pphead = NULL;
 
   }
-  //clearÁ´±í:ÇåÀíËùÓÐµÄÊý¾Ý½Úµã£¬±£ÁôÍ·½áµã£¬¿ÉÒÔ¼ÌÐøÊ¹ÓÃ
+  //clearé“¾è¡¨:æ¸…ç†æ‰€æœ‰çš„æ•°æ®èŠ‚ç‚¹ï¼Œä¿ç•™å¤´ç»“ç‚¹ï¼Œå¯ä»¥ç»§ç»­ä½¿ç”¨
   void ListClear(ListNode* phead)
   {
 	  assert(phead);
-	  ListNode* cur = phead;
+	  ListNode* cur = phead->next;
 	  while (cur != phead)
 	  {
 		  ListNode* next = cur->next;
 		  free(cur);
 		  cur = next;
 	  }
-	  phead->next = phead;//±£Ö¤×Ô¼º´¦ÓÚÑ­»·×´Ì¬
+	  phead->next = phead;//ä¿è¯è‡ªå·±å¤„äºŽå¾ªçŽ¯çŠ¶æ€
 	  phead->prev = phead;
   }
-//´òÓ¡
+//æ‰“å°
 void ListPrint(ListNode* phead)
 {
 	assert(phead);
@@ -57,10 +57,10 @@ void ListPrint(ListNode* phead)
 	}
 	printf("\n");
 }
-//Î²²å
+//å°¾æ’
 void ListPushBack(ListNode* phead, LTDataType x)
 {
-	//·¨Ò»£º
+	//æ³•ä¸€ï¼š
 	//assert(phead);
 	//ListNode* tail = phead->prev;
 	//ListNode* newnode = BuyListNode(x);
@@ -69,15 +69,15 @@ void ListPushBack(ListNode* phead, LTDataType x)
 	//newnode->next = phead;
 	//phead->prev = newnode;
 
-	//·¨¶þ£º
+	//æ³•äºŒï¼š
 	ListInsert(phead, x);
 }
-//Î²É¾
+//å°¾åˆ 
 void ListPopBack(ListNode* phead, LTDataType x)
 {
-	//·¨Ò»£º
+	//æ³•ä¸€ï¼š
 	//assert(phead);
-	//assert(phead->next != NULL);//¼ì²éÁ´±íÊÇ·ñÎª¿Õ
+	//assert(phead->next != NULL);//æ£€æŸ¥é“¾è¡¨æ˜¯å¦ä¸ºç©º
 	//ListNode* tail = phead->prev;
 	//ListNode* tailPrev = tail->prev;
 	//tailPrev->next = phead;
@@ -85,10 +85,10 @@ void ListPopBack(ListNode* phead, LTDataType x)
 	//free(tail);
 	//tail=NULL;
 
-	//·¨¶þ£º
+	//æ³•äºŒï¼š
 	ListErase(phead->prev);
 }
-//Í·²å
+//å¤´æ’
 void ListPushFront(ListNode* phead, LTDataType x)
 {
 	assert(phead);
@@ -99,22 +99,22 @@ void ListPushFront(ListNode* phead, LTDataType x)
 	newnode->next = first;
 	first->prev = newnode;
 }
-//Í·É¾
+//å¤´åˆ 
 void ListPopFront(ListNode* phead)
 {
-	//·¨Ò»£º
+	//æ³•ä¸€ï¼š
 	//assert(phead);
-	//assert(phead->next != phead);//¶ÏÑÔ
+	//assert(phead->next != phead);//æ–­è¨€
 	//ListNode* first = phead->next;
 	//ListNode* second = first->next;
 	////phead first second 
 	//phead->next = second;
 	//second ->prev = phead;
 	//free(first);
-	//·¨¶þ£º
+	//æ³•äºŒï¼š
 	ListErase(phead->next);
 }
-//²éÕÒx ·µ»Ø ½ÚµãµÄÖ¸Õë
+//æŸ¥æ‰¾x è¿”å›ž èŠ‚ç‚¹çš„æŒ‡é’ˆ
 ListNode* ListFind(ListNode* phead, LTDataType x)
 {
 	assert(phead);
@@ -128,7 +128,7 @@ ListNode* ListFind(ListNode* phead, LTDataType x)
 	return NULL;
 }
 
-//ÔÚposÇ°²åÈëx
+//åœ¨poså‰æ’å…¥x
 void ListInsert(ListNode* pos, LTDataType x)
 {
 	assert(pos);
@@ -143,10 +143,10 @@ void ListInsert(ListNode* pos, LTDataType x)
 
 
 }
-//É¾³ý
+//åˆ é™¤
 void ListErase(ListNode* pos)
 {
-	assert(pos);//pos²»ÄÜÊÇphead
+	assert(pos);//posä¸èƒ½æ˜¯phead
 	//assert(pos != phead);
 	ListNode* posPrev = pos->prev;
 	ListNode* posNext = pos->next;
